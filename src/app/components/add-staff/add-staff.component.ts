@@ -10,6 +10,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpCommonService } from 'src/app/services/http-common.service';
 
 @Component({
@@ -26,12 +27,14 @@ export class AddStaffComponent implements OnInit {
   };
   alert: string = 'This field empty';
   staff: any;
+  errorEmail: Boolean = true
 
   constructor(
     private dialogRef: MatDialogRef<AddStaffComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private http: HttpCommonService
+    private http: HttpCommonService,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -40,8 +43,11 @@ export class AddStaffComponent implements OnInit {
 
   createForm() {
     this.addStaffForm = new FormGroup<any>({
-      // _id: this.addStaffForm[this.addStaffForm.length -1]._id,
-      email: new FormControl('', [Validators.required]),
+      office_phone: new FormControl(''),
+      mobile_phone: new FormControl(''),
+      direct_line: new FormControl(''),
+      select_entity: new FormControl(''),
+      email: new FormControl('', [Validators.required, Validators.email]),
       first_name: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [Validators.required]),
       position: new FormControl('', [Validators.required]),
@@ -51,6 +57,7 @@ export class AddStaffComponent implements OnInit {
         user_type: new FormControl('', [Validators.required]),
       })
     });
+    console.log(this.addStaffForm)
   }
 
   formSubmit() {
@@ -60,7 +67,26 @@ export class AddStaffComponent implements OnInit {
     data.push(this.staff);
     console.log(data);
     localStorage.setItem('data-staff', JSON.stringify(data));
-    this.dialogRef.close();
+    // this.dialogRef.close();
+  }
+
+  checkEmailAvaibility () {
+    const data = JSON.parse(localStorage.getItem('data-staff') || '');
+    console.log(data)
+    const checkEmail = data.find((item:any) =>
+      item.email === this.addStaffForm.value.email
+    )
+    console.log(this.addStaffForm)
+    if (!checkEmail && this.addStaffForm.controls.email.status === "VALID") {
+      this.errorEmail = false
+      this.snackbar.open('Email Available', 'X')
+    } else if (this.addStaffForm.controls.email.status === "INVALID") {
+      this.errorEmail = true
+      this.snackbar.open('Email Invalid', 'X')
+    } else {
+      this.errorEmail = true
+      this.snackbar.open('Email Unavailable', 'X')
+    }
   }
 
   close() {

@@ -8,11 +8,17 @@
       <div>
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" />
+          <input matInput formControlName="email" type="email"/>
+          <mat-error *ngIf="addStaffForm.controls.email.errors?.required === true">
+            Email Required
+          </mat-error>
         </mat-form-field>
-        <button mat-raised-button>
+        <button (click)="checkEmailAvaibility()" [disabled]="!errorEmail && addStaffForm.controls.email.errors === null" type="button" mat-raised-button>
           Check Avaibility
         </button>
+        <ng-container *ngIf="!errorEmail">
+          <h1>Email is available</h1>
+        </ng-container>
       </div>
 
       <div>
@@ -26,14 +32,23 @@
         <mat-form-field appearance="fill">
           <mat-label>First Name</mat-label>
           <input matInput formControlName="first_name" />
+          <mat-error *ngIf="addStaffForm.controls.first_name.errors?.required === true">
+            First Name Required
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Last Name</mat-label>
           <input matInput formControlName="last_name" />
+          <mat-error *ngIf="addStaffForm.controls.last_name.errors?.required === true">
+            Last Name Required
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Position Name</mat-label>
           <input matInput formControlName="position" />
+          <mat-error *ngIf="addStaffForm.controls.position.errors?.required === true">
+            Position Required
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -56,25 +71,25 @@
         <mat-form-field appearance="fill">
           <mat-label>Select Entity</mat-label>
           <mat-select>
-            <mat-option value="Company">Company</mat-option>
+            <mat-option selected value="Company">Company</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Select Company</mat-label>
           <mat-select formControlName="name" aria-label="Select an option">
-            <mat-option value="Company">Company</mat-option>
+            <mat-option selected value="Company">Company</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
-          <mat-select formControlName="user_type" aria-label="Select an option">
+          <mat-select matNativeControl formControlName="user_type" aria-label="Select an option">
             <mat-option value="HR">HR</mat-option>
-            <mat-option value="Mentor">Mentor</mat-option>
+            <mat-option selected value="Mentor">Mentor</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div>
-        <button mat-button (click)="close()">Cancel</button>
-        <button mat-button cdkFocusInitial>Submit</button>
+        <button mat-button type="button" (click)="close()">Cancel</button>
+        <button mat-button type="submit" [disabled]="errorEmail === true && addStaffForm.status === 'INVALID' ">Submit</button>
       </div>
     </form>
   </div>
