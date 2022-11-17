@@ -1,0 +1,63 @@
+<div class="demo-button-container">
+    <button mat-raised-button (click)="openModal()" class="demo-button">
+      Add data
+    </button>
+    <button
+        mat-raised-button
+        (click)="setLocalStorage()"
+        class="demo-button">
+      Reset
+    </button>
+  </div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.last_name}} {{element.first_name}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="userType">
+      <th mat-header-cell *matHeaderCellDef> User Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.company.user_type}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="entity">
+      <th mat-header-cell *matHeaderCellDef> Entity </th>
+      <td mat-cell *matCellDef="let element"> {{element.company.name}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> 
+        <div *ngIf="element.user_status=== 'active' ">
+            <mat-icon style="background-color: green; border-radius: 50%; padding: 2px;" fontIcon="done"></mat-icon>
+        </div>
+        <div *ngIf="element.user_status=== 'pending' ">
+            <mat-icon style="background-color: black; border-radius: 50%; padding: 2px;" fontIcon="done"></mat-icon>
+        </div>
+        </td>
+      
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element"> 
+            <mat-icon (click)="detailStaff(element._id)" fontIcon="edit"></mat-icon>
+            <mat-icon fontIcon="mail"></mat-icon>
+            <mat-icon fontIcon="close"></mat-icon>
+        </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  

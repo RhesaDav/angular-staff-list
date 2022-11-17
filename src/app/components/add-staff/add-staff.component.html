@@ -1,0 +1,81 @@
+<div class="modal-body">
+  <div mat-dialog-title class="modal-title">
+    <h1>Add Company Staff for [nama company]</h1>
+    <h1>X</h1>
+  </div>
+  <div mat-dialog-content class="modal-content">
+    <form [formGroup]="addStaffForm" (ngSubmit)="formSubmit()">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" />
+        </mat-form-field>
+        <button mat-raised-button>
+          Check Avaibility
+        </button>
+      </div>
+
+      <div>
+        <ng-container>
+          <mat-label>Civility</mat-label>
+          <mat-radio-group formControlName="civility" aria-label="Select an option">
+            <mat-radio-button value="Mr">Mr</mat-radio-button>
+            <mat-radio-button value="Mrs">Mrs</mat-radio-button>
+          </mat-radio-group>
+        </ng-container>
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="first_name" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="last_name" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Position Name</mat-label>
+          <input matInput formControlName="position" />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Office Phone</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Direct Line</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Mobile Phone</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </div>
+
+      <div formGroupName="company">
+        <mat-form-field appearance="fill">
+          <mat-label>Select Entity</mat-label>
+          <mat-select>
+            <mat-option value="Company">Company</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Select Company</mat-label>
+          <mat-select formControlName="name" aria-label="Select an option">
+            <mat-option value="Company">Company</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-select formControlName="user_type" aria-label="Select an option">
+            <mat-option value="HR">HR</mat-option>
+            <mat-option value="Mentor">Mentor</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button (click)="close()">Cancel</button>
+        <button mat-button cdkFocusInitial>Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
