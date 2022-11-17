@@ -63,7 +63,7 @@ export class AddStaffComponent implements OnInit {
   formSubmit() {
     const data = JSON.parse(localStorage.getItem('data-staff') || '');
     const getId = Number(data[data.length -1]._id)+1
-    this.staff = {...this.addStaffForm.value, _id:getId.toString()}
+    this.staff = {...this.addStaffForm.value, _id:getId.toString(), user_status: 'pending'}
     data.push(this.staff);
     console.log(data);
     localStorage.setItem('data-staff', JSON.stringify(data));

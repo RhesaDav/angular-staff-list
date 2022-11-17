@@ -15,9 +15,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { MaterialModule } from './material/material.module';
 import { EditStaffComponent } from './components/edit-staff/edit-staff.component';
+import { DeleteStaffComponent } from './components/delete-staff/delete-staff.component';
 
 @NgModule({
-  declarations: [AppComponent, StaffListComponent, AddStaffComponent, EditStaffComponent],
+  declarations: [AppComponent, StaffListComponent, AddStaffComponent, EditStaffComponent, DeleteStaffComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog'
 import { HttpCommonService } from 'src/app/services/http-common.service';
 import { AddStaffComponent } from '../add-staff/add-staff.component';
+import { DeleteStaffComponent } from '../delete-staff/delete-staff.component';
+import { EditStaffComponent } from '../edit-staff/edit-staff.component';
 
 @Component({
   selector: 'app-staff-list',
@@ -12,6 +14,7 @@ import { AddStaffComponent } from '../add-staff/add-staff.component';
 export class StaffListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'userType', 'entity', 'status', 'action'];
   dataSource = new Array<any>()
+  dataDetail: any;
 
   constructor(private http: HttpClient, private modal: MatDialog, public httpService: HttpCommonService) { }
 
@@ -31,15 +34,34 @@ export class StaffListComponent implements OnInit {
     this.dataSource = JSON.parse(data || '')
   }
 
-  detailStaff (id:any) {
-    console.log(id)
-    const data = this.dataSource.find(item => item._id === id)
-    console.log(data)
+  openModalDetail (id:any) {
+    // console.log(id)
+    this.dataDetail = this.dataSource.find(item => item._id === id)
+    // console.log(data)
+    this.modal.open(EditStaffComponent, {
+      data: {
+        dataDetail: this.dataDetail,
+        staffList: this.dataSource
+      }
+    })
   }
 
-  openModal() {
+  openModalAdd() {
     let dialogRef = this.modal.open(AddStaffComponent)
     dialogRef.afterClosed().subscribe((result) => {
+      this.loadData()
+    })
+  }
+
+  openModalDelete(id: any) {
+    let dialogRef = this.modal.open(DeleteStaffComponent, {
+      data: {
+        id: id,
+        detail: this.dataSource.find(item => item._id === id),
+        list: this.dataSource
+      }
+    })
+    dialogRef.afterClosed().subscribe(() => {
       this.loadData()
     })
   }
