@@ -1,1 +1,96 @@
-<p>edit-staff works!</p>
+<div class="modal-body">
+    <div mat-dialog-title class="modal-title">
+      <h1>Add Company Staff for company</h1>
+      <h1>X</h1>
+    </div>
+    <div mat-dialog-content class="modal-content">
+      <form [formGroup]="editStaffForm" (ngSubmit)="formSubmit()">
+        <div class="email">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email"/>
+            <mat-error *ngIf="editStaffForm.controls.email.errors?.required === true">
+              Email Required
+            </mat-error>
+          </mat-form-field>
+          <button (click)="checkEmailAvaibility()" [disabled]="!errorEmail && editStaffForm.controls.email.errors === null" type="button" mat-stroked-button style="height: 50px;">
+            Check Avaibility
+          </button>
+          <ng-container *ngIf="!errorEmail">
+            <h1>Email is available</h1>
+          </ng-container>
+        </div>
+  
+        <div class="name">
+          <div class="civility">
+            <mat-label>Civility</mat-label>
+            <mat-radio-group formControlName="civility" aria-label="Select an option">
+              <mat-radio-button value="Mr">Mr</mat-radio-button>
+              <mat-radio-button value="Mrs">Mrs</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="first_name" />
+            <mat-error *ngIf="editStaffForm.controls.first_name.errors?.required === true">
+              First Name Required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="last_name" />
+            <mat-error *ngIf="editStaffForm.controls.last_name.errors?.required === true">
+              Last Name Required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Position Name</mat-label>
+            <input matInput formControlName="position" />
+            <mat-error *ngIf="editStaffForm.controls.position.errors?.required === true">
+              Position Required
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="phone">
+          <mat-form-field appearance="fill">
+            <mat-label>Office Phone</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Direct Line</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Mobile Phone</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+  
+        <div class="entity" formGroupName="company">
+          <mat-form-field appearance="fill">
+            <mat-label>Select Entity</mat-label>
+            <mat-select>
+              <mat-option selected value="Company">Company</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Select Company</mat-label>
+            <mat-select formControlName="name" aria-label="Select an option">
+              <mat-option selected value="Company">Company</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-select matNativeControl formControlName="user_type" aria-label="Select an option">
+              <mat-option value="HR">HR</mat-option>
+              <mat-option selected value="Mentor">Mentor</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-button type="button" (click)="close()">Cancel</button>
+          <button mat-button type="submit" [disabled]="errorEmail === true && editStaffForm.status === 'INVALID' ">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>

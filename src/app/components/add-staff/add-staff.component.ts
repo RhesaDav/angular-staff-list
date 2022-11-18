@@ -19,21 +19,13 @@ import { HttpCommonService } from 'src/app/services/http-common.service';
   styleUrls: ['./add-staff.component.scss'],
 })
 export class AddStaffComponent implements OnInit {
-  addStaffForm: any = {
-    company: {
-      name: String,
-      user_type: String,
-    },
-  };
-  alert: string = 'This field empty';
+  addStaffForm: any 
   staff: any;
   errorEmail: Boolean = true
 
   constructor(
     private dialogRef: MatDialogRef<AddStaffComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private formBuilder: FormBuilder,
-    private http: HttpCommonService,
     private snackbar: MatSnackBar
   ) {}
 

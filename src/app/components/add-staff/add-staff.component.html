@@ -1,11 +1,11 @@
 <div class="modal-body">
   <div mat-dialog-title class="modal-title">
-    <h1>Add Company Staff for [nama company]</h1>
+    <h1>Add Company Staff for company</h1>
     <h1>X</h1>
   </div>
   <div mat-dialog-content class="modal-content">
     <form [formGroup]="addStaffForm" (ngSubmit)="formSubmit()">
-      <div>
+      <div class="email">
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" type="email"/>
@@ -13,7 +13,7 @@
             Email Required
           </mat-error>
         </mat-form-field>
-        <button (click)="checkEmailAvaibility()" [disabled]="!errorEmail && addStaffForm.controls.email.errors === null" type="button" mat-raised-button>
+        <button (click)="checkEmailAvaibility()" [disabled]="!errorEmail && addStaffForm.controls.email.errors === null" type="button" mat-stroked-button style="height: 50px;">
           Check Avaibility
         </button>
         <ng-container *ngIf="!errorEmail">
@@ -21,14 +21,14 @@
         </ng-container>
       </div>
 
-      <div>
-        <ng-container>
+      <div class="name">
+        <div class="civility">
           <mat-label>Civility</mat-label>
           <mat-radio-group formControlName="civility" aria-label="Select an option">
             <mat-radio-button value="Mr">Mr</mat-radio-button>
             <mat-radio-button value="Mrs">Mrs</mat-radio-button>
           </mat-radio-group>
-        </ng-container>
+        </div>
         <mat-form-field appearance="fill">
           <mat-label>First Name</mat-label>
           <input matInput formControlName="first_name" />
@@ -52,7 +52,7 @@
         </mat-form-field>
       </div>
 
-      <div>
+      <div class="phone">
         <mat-form-field appearance="fill">
           <mat-label>Office Phone</mat-label>
           <input matInput />
@@ -67,7 +67,7 @@
         </mat-form-field>
       </div>
 
-      <div formGroupName="company">
+      <div class="entity" formGroupName="company">
         <mat-form-field appearance="fill">
           <mat-label>Select Entity</mat-label>
           <mat-select>
