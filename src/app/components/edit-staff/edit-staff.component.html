@@ -4,21 +4,21 @@
       <h1>X</h1>
     </div>
     <div mat-dialog-content class="modal-content">
-      <form [formGroup]="editStaffForm" (ngSubmit)="formSubmit()">
+      <form [formGroup]="editStaffForm" (ngSubmit)="editForm(data.dataDetail)">
         <div class="email">
           <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
             <input matInput formControlName="email" type="email"/>
-            <mat-error *ngIf="editStaffForm.controls.email.errors?.required === true">
+            <!-- <mat-error *ngIf="editStaffForm.controls.email.errors?.required === true">
               Email Required
-            </mat-error>
+            </mat-error> -->
           </mat-form-field>
-          <button (click)="checkEmailAvaibility()" [disabled]="!errorEmail && editStaffForm.controls.email.errors === null" type="button" mat-stroked-button style="height: 50px;">
+          <!-- <button (click)="checkEmailAvaibility()" [disabled]="!errorEmail && editStaffForm.controls.email.errors === null" type="button" mat-stroked-button style="height: 50px;">
             Check Avaibility
-          </button>
-          <ng-container *ngIf="!errorEmail">
+          </button> -->
+          <!-- <ng-container *ngIf="!errorEmail">
             <h1>Email is available</h1>
-          </ng-container>
+          </ng-container> -->
         </div>
   
         <div class="name">
@@ -32,23 +32,23 @@
           <mat-form-field appearance="fill">
             <mat-label>First Name</mat-label>
             <input matInput formControlName="first_name" />
-            <mat-error *ngIf="editStaffForm.controls.first_name.errors?.required === true">
+            <!-- <mat-error *ngIf="editStaffForm.controls.first_name.errors?.required === true">
               First Name Required
-            </mat-error>
+            </mat-error> -->
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Last Name</mat-label>
             <input matInput formControlName="last_name" />
-            <mat-error *ngIf="editStaffForm.controls.last_name.errors?.required === true">
+            <!-- <mat-error *ngIf="editStaffForm.controls.last_name.errors?.required === true">
               Last Name Required
-            </mat-error>
+            </mat-error> -->
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Position Name</mat-label>
             <input matInput formControlName="position" />
-            <mat-error *ngIf="editStaffForm.controls.position.errors?.required === true">
+            <!-- <mat-error *ngIf="editStaffForm.controls.position.errors?.required === true">
               Position Required
-            </mat-error>
+            </mat-error> -->
           </mat-form-field>
         </div>
   
@@ -89,7 +89,7 @@
         </div>
         <div>
           <button mat-button type="button" (click)="close()">Cancel</button>
-          <button mat-button type="submit" [disabled]="errorEmail === true && editStaffForm.status === 'INVALID' ">Submit</button>
+          <button mat-button type="submit"  >Submit</button>
         </div>
       </form>
     </div>

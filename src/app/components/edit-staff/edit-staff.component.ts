@@ -18,8 +18,9 @@ export class EditStaffComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('data modal', this.data)
     this.createForm()
+    // this.getEmployee()
+    // this.getEmployee()
   }
 
   createForm() {
@@ -28,19 +29,65 @@ export class EditStaffComponent implements OnInit {
       mobile_phone: new FormControl(''),
       direct_line: new FormControl(''),
       select_entity: new FormControl(''),
-      email: new FormControl(this.data.dataDetail.email, [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       first_name: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [Validators.required]),
-      position: new FormControl('', [Validators.required]),
+      position: new FormControl(''),
       civility: new FormControl('', [Validators.required]),
       company: new FormGroup({
         name: new FormControl('', [Validators.required]),
         user_type: new FormControl('', [Validators.required]),
       })
     });
-    console.log(this.editStaffForm)
+    const data = this.data.dataDetail
+    this.editStaffForm.patchValue({
+      office_phone: data.office_phone ? data.office_phone : '',
+      mobile_phone: data.mobile_phone ? data.mobile_phone : '',
+      direct_line: data.direct_line ? data.direct_line : '',
+      select_entity: data.select_entity? data.select_entity : '',
+      email: data.email,
+      first_name: data.first_name,
+      last_name: data.last_name,
+      position: data.position ? data.position : '',
+      civility: data.civility,
+      company: {
+        name: data.company.name,
+        user_type: data.company.user_type,
+      }
+    })
   }
 
+  getEmployee() {
+    this.editStaffForm = this.data.dataDetail
+}
+  
+  editForm (data:any) {
+    const found = this.data.staffList.findIndex((item:any) => 
+      item._id === data._id
+    )
+    console.log(this.editStaffForm.value)
+    this.data.staffList[found] = this.editStaffForm.value
+    console.log(this.data.staffList)
+    localStorage.setItem("data-staff", JSON.stringify(this.data.staffList))
+    // this.editStaffForm = this.data.dataDetail
+    // this.editStaffForm.patchValue({
+    //   office_phone: data.office_phone,
+    //   mobile_phone: data.mobile_phone,
+    //   direct_line: data.data,
+    //   select_entity: data.select_entity,
+    //   email: data.email,
+    //   first_name: data.first_name,
+    //   last_name: data.last_name,
+    //   position: data.position,
+    //   civility: data.civility,
+    //   company: {
+    //     name: data.company.name,
+    //     user_type: data.company.user_type,
+    //   }
+    // })
+    // console.log(this.editStaffForm)
+  }
+  
   formSubmit() {
 
   }

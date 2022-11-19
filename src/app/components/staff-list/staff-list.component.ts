@@ -38,12 +38,13 @@ export class StaffListComponent implements OnInit {
     // console.log(id)
     this.dataDetail = this.dataSource.find(item => item._id === id)
     // console.log(data)
-    this.modal.open(EditStaffComponent, {
+    let dialogRef = this.modal.open(EditStaffComponent, {
       data: {
         dataDetail: this.dataDetail,
         staffList: this.dataSource
       }
     })
+    dialogRef.afterClosed().subscribe(() => this.loadData())
   }
 
   openModalAdd() {
