@@ -16,9 +16,10 @@ import {MatInputModule} from '@angular/material/input';
 import { MaterialModule } from './material/material.module';
 import { EditStaffComponent } from './components/edit-staff/edit-staff.component';
 import { DeleteStaffComponent } from './components/delete-staff/delete-staff.component';
+import { ModalSpinnerComponent } from './components/modal-spinner/modal-spinner.component';
 
 @NgModule({
-  declarations: [AppComponent, StaffListComponent, AddStaffComponent, EditStaffComponent, DeleteStaffComponent],
+  declarations: [AppComponent, StaffListComponent, AddStaffComponent, EditStaffComponent, DeleteStaffComponent, ModalSpinnerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

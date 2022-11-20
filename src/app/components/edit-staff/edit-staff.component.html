@@ -1,6 +1,6 @@
 <div class="modal-body">
     <div mat-dialog-title class="modal-title">
-      <h1>Add Company Staff for company</h1>
+      <h1>Edit Company Staff for company</h1>
       <h1>X</h1>
     </div>
     <div mat-dialog-content class="modal-content">
@@ -25,8 +25,8 @@
           <div class="civility">
             <mat-label>Civility</mat-label>
             <mat-radio-group formControlName="civility" aria-label="Select an option">
-              <mat-radio-button value="Mr">Mr</mat-radio-button>
-              <mat-radio-button value="Mrs">Mrs</mat-radio-button>
+              <mat-radio-button value="MR">Mr</mat-radio-button>
+              <mat-radio-button value="MRS">Mrs</mat-radio-button>
             </mat-radio-group>
           </div>
           <mat-form-field appearance="fill">
@@ -55,22 +55,22 @@
         <div class="phone">
           <mat-form-field appearance="fill">
             <mat-label>Office Phone</mat-label>
-            <input matInput />
+            <input matInput formControlName="office_phone" />
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Direct Line</mat-label>
-            <input matInput />
+            <input matInput formControlName="direct_line" />
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Mobile Phone</mat-label>
-            <input matInput />
+            <input matInput formControlName='mobile_phone'/>
           </mat-form-field>
         </div>
   
         <div class="entity" formGroupName="company">
           <mat-form-field appearance="fill">
             <mat-label>Select Entity</mat-label>
-            <mat-select>
+            <mat-select formControlName="select_entity" >
               <mat-option selected value="Company">Company</mat-option>
             </mat-select>
           </mat-form-field>
